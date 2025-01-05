@@ -27,7 +27,7 @@ macro_rules! define_dht {
                 mut pio: hal::pio::PIO<P>,
                 sm: UninitStateMachine<(P, STI)>,
                 dht_pin: I,
-                clocks: &hal::clocks::ClocksManager,
+                system_clock: hal::clocks::SystemClock,
             ) -> Self {
                 let program = pio_file!("./src/dht.pio");
 
@@ -35,7 +35,7 @@ macro_rules! define_dht {
 
                 let installed = pio.install(&program.program).unwrap();
 
-                let (int, frac) = (clocks.system_clock.freq().to_MHz() as u16, 0);
+                let (int, frac) = (system_clock.freq().to_MHz() as u16, 0);
                 assert!(int > 0, "the system_clock must be >= 1MHz");
                 
                 let (mut sm, rx, tx) = hal::pio::PIOBuilder::from_installed_program(installed)
