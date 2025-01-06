@@ -82,7 +82,7 @@ impl<P: PIOExt, STI: StateMachineIndex> Dht22Type2<P, STI> {
         pio: hal::pio::PIO<P>,
         sm: UninitStateMachine<(P, STI)>,
         dht_pin: I,
-        system_clock: &hal::clocks::SystemClock,,
+        system_clock: &hal::clocks::SystemClock,
     ) -> Self {
         Self {
             dht: DhtPio::new(pio, sm, dht_pin, system_clock),
