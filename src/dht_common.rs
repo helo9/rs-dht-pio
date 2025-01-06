@@ -27,7 +27,7 @@ macro_rules! define_dht {
                 mut pio: hal::pio::PIO<P>,
                 sm: UninitStateMachine<(P, STI)>,
                 dht_pin: I,
-                system_clock: hal::clocks::SystemClock,
+                system_clock: &hal::clocks::SystemClock,
             ) -> Self {
                 let program = pio_file!("./src/dht.pio");
 
